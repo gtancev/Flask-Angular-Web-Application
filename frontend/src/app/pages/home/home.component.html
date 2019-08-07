@@ -1,0 +1,119 @@
+<div fxLayoutAlign="center center" fxLayout="column">
+    <h1>kidnAI</h1>
+
+    <div class="home__prediction"
+         fxLayoutAlign="center center"
+         fxLayout="column">
+        <div fxLayoutAlign="center center" fxLayout="column">
+            <span class="home__span-container"><b>kidnAI</b> is a web application that helps predicting the health condition of a patient on <b>hemodialysis</b>.
+                Provide the requested patient characteristics (in adequate physical units) and press the button for prediction.
+                The result is provided as a combination of <b>robust</b> and <b>frail</b>, the larger fraction being the predicted status.
+                In addition, you can adjust one or more parameters to examine whether any improvement in health condition is possible.
+            </span>
+        </div>
+        <h4>Define your hemodialysis patient.</h4>
+        <md-card class="home__input-card" fxLayoutAlign="center center" fxLayout="column">
+            <div fxLayout="row">
+                <md-input-container class="home__input-container">
+                    <input mdInput
+                            name="albumin"
+                            placeholder="albumin | g/dl"
+                            [(ngModel)]="patient.albumin">
+                </md-input-container>
+                <md-input-container class="home__input-container">
+                    <input mdInput
+                           name="albumin/globulin ratio"
+                           placeholder="albumin/globulin ratio | -"
+                           [(ngModel)]="patient.a_g_ratio">
+                </md-input-container>
+            </div>
+            <div fxLayout="row">
+                <md-input-container class="home__input-container">
+                    <input mdInput
+                            name="creatinine"
+                            placeholder="creatinine | mg/dl"
+                            [(ngModel)]="patient.creatinine">
+                </md-input-container>
+                <md-input-container class="home__input-container">
+                    <input mdInput
+                            name="hemoglobin"
+                            placeholder="hemoglobin | g/dl"
+                            [(ngModel)]="patient.hemoglobin">
+                </md-input-container>
+            </div>
+            <div fxLayout="row">
+                <md-input-container class="home__input-container">
+                    <input mdInput
+                            name="total lactate dehydrogenase"
+                            placeholder="total lactate dehydrogenase | u/l"
+                            [(ngModel)]="patient.ldh_total">
+                </md-input-container>
+                <md-input-container class="home__input-container">
+                    <input mdInput
+                           name="lymphocytes"
+                           placeholder="lymphocytes | %"
+                           [(ngModel)]="patient.lymphocytes">
+                </md-input-container>
+            </div>
+            <div fxLayout="row">
+                <md-input-container class="home__input-container">
+                    <input mdInput
+                           name="red blood cell count"
+                           placeholder="red blood cell count | 10¹²/l"
+                           [(ngModel)]="patient.rbc">
+                </md-input-container>
+                <md-input-container class="home__input-container">
+                    <input mdInput
+                           name="red blood cell distribution width"
+                           placeholder="red blood cell distribution width | %"
+                           [(ngModel)]="patient.rdw">
+                </md-input-container>
+            </div>
+            <div fxLayout="row">
+                <md-input-container class="home__input-container">
+                    <input mdInput
+                           name="post-sitting systolic blood pressure"
+                           placeholder="post-sitting systolic blood pressure | mmHg"
+                           [(ngModel)]="patient.postsittingsystolicbp">
+                </md-input-container>
+                <md-input-container class="home__input-container">
+                    <input mdInput
+                           name="total single-pool Kt/V"
+                           placeholder="total single-pool Kt/V | -"
+                           [(ngModel)]="patient.spkt_v_total">
+                </md-input-container>
+            </div>
+            <div fxLayout="row">
+                <md-input-container class="home__input-container">
+                    <input mdInput
+                           name="ultrafiltration rate"
+                           placeholder="ultrafiltration rate | (ml/kg)/h"
+                           [(ngModel)]="patient.ufr">
+                </md-input-container>
+                <md-input-container class="home__input-container">
+                    <input mdInput
+                           name="z-scored weight"
+                           placeholder="z-scored weight | -"
+                           [(ngModel)]="patient.z_scored_weight">
+                </md-input-container>
+            </div>
+            <div>
+                <button md-raised-button (click)="predictPatient()">Predict status.</button>
+            </div>
+        </md-card>
+        <h4>Asses the prediction result.</h4>
+        <div *ngIf="probabilityPredictions"
+             fxLayoutAlign="center center"
+             fxLayout="column"
+             class="home__chart-container">
+            
+            <ngx-charts-pie-chart
+                [results]="probabilityPredictions"
+                [scheme]="colorScheme"
+                [explodeSlices]="true"
+                [labels]="true"
+                [legend]="true">
+            </ngx-charts-pie-chart>
+        </div>
+    </div>
+</div>
