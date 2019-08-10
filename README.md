@@ -7,14 +7,14 @@ Read the corresponding Medium article [here](https://medium.com/@dvelsner/deploy
 
 First fork or clone this repo:
 
-e.g. `git clone https://github.com/delsner/flask-angular-data-science.git`
+e.g. `git clone https://github.com/gtancev/kidnAI.git`
  
 
 ## Build images and run containers with docker-compose
 
 After cloning the repository go inside the project folder:
 
-`cd flask-angular-data-science`
+`cd kidnAI`
 
 Run `docker-compose up` which will start a Flask web application for the backend API (default port `8081`) and an Angular frontend served through a webpack development web server (default port `4200`).
 
